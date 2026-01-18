@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影片逐字稿理解系統</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 標題區 -->
+        <header class="header">
+            <h1 class="title">影片逐字稿理解系統</h1>
+            <p class="subtitle">上傳影片，用自然語言搜尋內容</p>
+        </header>
+
+        <!-- 主要內容區 -->
+        <main class="main-content">
+            <!-- 左側：上傳與狀態 -->
+            <section class="upload-section">
+                <div class="card">
+                    <h2 class="card-title">上傳影片</h2>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">拖放影片至此處或點擊選擇檔案</p>
+                        <p class="upload-hint">支援 MP4, MKV, AVI, MOV 等格式</p>
+                        <input type="file" id="fileInput" accept=".mp4,.mkv,.avi,.mov,.wmv,.flv,.webm,.m4v" hidden>
+                    </div>
+                    
+                    <div class="selected-file" id="selectedFile" style="display: none;">
+                        <span class="file-name" id="fileName"></span>
+                        <button class="btn-remove" id="removeFile">移除</button>
+                    </div>
+                    
+                    <button class="btn-primary" id="uploadBtn" disabled>開始處理</button>
+                </div>
+                
+                <!-- 處理狀態 -->
+                <div class="card" id="statusCard" style="display: none;">
+                    <h2 class="card-title">處理進度</h2>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                    
+                    <div class="status-stages">
+                        <div class="stage" id="stage-transcribe">
+                            <div class="stage-icon">1</div>
+                            <span>語音轉文字</span>
+                        </div>
+                        <div class="stage" id="stage-screenshots">
+                            <div class="stage-icon">2</div>
+                            <span>擷取截圖</span>
+                        </div>
+                        <div class="stage" id="stage-rag">
+                            <div class="stage-icon">3</div>
+                            <span>建立索引</span>
+                        </div>
+                    </div>
+                    
+                    <p class="status-message" id="statusMessage"></p>
+                </div>
+            </section>
+
+            <!-- 右側：搜尋與結果 -->
+            <section class="search-section">
+                <div class="card">
+                    <h2 class="card-title">語意搜尋</h2>
+                    
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="輸入關鍵字或問句..." disabled>
+                        <button class="btn-search" id="searchBtn" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 搜尋結果 -->
+                <div class="results-container" id="resultsContainer">
+                    <div class="card placeholder-card">
+                        <p class="placeholder-text">上傳影片後即可開始搜尋</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
