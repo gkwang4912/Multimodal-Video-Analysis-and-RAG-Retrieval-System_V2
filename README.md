@@ -19,29 +19,29 @@
 ### 系統架構圖
 ```mermaid
 graph TD
-    User[使用者] -->|上傳影片/搜尋| Frontend[前端介面 (HTML/JS)]
-    Frontend <-->|HTTP API| Backend[後端伺服器 (Flask)]
+    User["使用者"] -->|"上傳影片/搜尋"| Frontend["前端介面 (HTML/JS)"]
+    Frontend <-->|"HTTP API"| Backend["後端伺服器 (Flask)"]
     
     subgraph "核心處理模組 (Core Modules)"
-        Backend -->|1. 呼叫| Transcribe[轉錄模組 (transcribe.py)]
-        Backend -->|2. 呼叫| Screenshot[截圖模組 (extract_screenshots.py)]
-        Backend -->|3. 呼叫| RAG_Ingest[索引模組 (rag_ingest.py)]
-        Backend -->|4. 查詢| RAG_Query[搜尋模組 (rag_query.py)]
+        Backend -->|"1. 呼叫"| Transcribe["轉錄模組 (transcribe.py)"]
+        Backend -->|"2. 呼叫"| Screenshot["截圖模組 (extract_screenshots.py)"]
+        Backend -->|"3. 呼叫"| RAG_Ingest["索引模組 (rag_ingest.py)"]
+        Backend -->|"4. 查詢"| RAG_Query["搜尋模組 (rag_query.py)"]
     end
     
     subgraph "外部服務 & 模型 (External)"
-        Transcribe -->|API Request| OpenAI[OpenAI GPT-4o API]
-        RAG_Ingest -->|Load| CLIP[CLIP Model (Local)]
-        RAG_Query -->|Load| CLIP
+        Transcribe -->|"API Request"| OpenAI["OpenAI GPT-4o API"]
+        RAG_Ingest -->|"Load"| CLIP["CLIP Model (Local)"]
+        RAG_Query -->|"Load"| CLIP
     end
     
     subgraph "資料存儲 (Storage)"
-        Transcribe -->|Write| CSV[transcripts.csv]
-        Screenshot -->|Update| CSV
-        Screenshot -->|Save| Img[Images]
-        RAG_Ingest -->|Read| CSV
-        RAG_Ingest -->|Build| DB[(SQLite + FAISS)]
-        RAG_Query -->|Query| DB
+        Transcribe -->|"Write"| CSV["transcripts.csv"]
+        Screenshot -->|"Update"| CSV
+        Screenshot -->|"Save"| Img["Images"]
+        RAG_Ingest -->|"Read"| CSV
+        RAG_Ingest -->|"Build"| DB[("SQLite + FAISS")]
+        RAG_Query -->|"Query"| DB
     end
 ```
 
