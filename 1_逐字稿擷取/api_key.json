@@ -1,0 +1,7 @@
+{
+    "openai": {
+        "api_key": "your_api_key_here",
+        "endpoint": "https://api.openai.com/v1/chat/completions",
+        "model": "gpt-4o-mini"
+    }
+}
